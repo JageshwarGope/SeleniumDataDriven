@@ -1,19 +1,22 @@
 package Keywords;
 
+import java.time.Duration;
+import java.util.Properties;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
+
 
 public class GenericKeywords {
 	
-	WebDriver driver;
+	public WebDriver driver;
+	public Properties prop;
 
 	
-	public void openBrowser(String browserName) {
+	public void openBrowser(String browserKey) {
+		
+		String browserName = prop.getProperty(browserKey);
 		
 		if(browserName.equalsIgnoreCase("chrome")) {
 
@@ -21,14 +24,16 @@ public class GenericKeywords {
 		driver = new ChromeDriver();
 		
 		} else if(browserName.equalsIgnoreCase("edge")){
-			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/driver/chromedriver.exe");
+			System.setProperty("webdriver.edge.driver", System.getProperty("user.dir")+"/driver/chromedriver.exe");
 			driver = new EdgeDriver();
 		} else {
 			System.out.println("Browser is not available");
 		}
 	
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 	
-		}
+}
 	
 	
 	public void closeBrowser() {
@@ -39,12 +44,14 @@ public class GenericKeywords {
 	
 
 	public void openUrl(String url) {
-		driver.get(url);
+		
+		driver.get(prop.getProperty(url));
 
 	}
 
-	public void click() {
+	public void click(String locatorKey) {
 
+		
 	}
 
 	public void enterText() {

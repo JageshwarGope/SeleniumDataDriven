@@ -1,6 +1,10 @@
 Generic Keywords
+
 openBrowser
-click
+clickOnElement
+getElement
+isElementPresent
+isElementDisplay
 enterText
 select
 getText
@@ -8,7 +12,21 @@ openUrl
 acceptAlert
 closeAlert
 takeScreenShot
-wait
+scrollToElement
+navigateBack
+refreshPage
+captureScreenshot
+addStepValidation
+
+
+waitForPageToBeLoaded
+waitForLoaderIconToDisappear
+waitForSeconds
+waitForElementToBeClickable
+waitForElementToBeVisible
+waitForElementToBePresence
+waitImplicitly
+
 
 
 validation keywords

@@ -14,11 +14,8 @@ public class ApplicationKeywords extends ValidationKeywords {
             
             FileInputStream fs = new FileInputStream(filePath);
             prop.load(fs);
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             System.out.println("ERROR: Properties file not found at the specified location.");
-            e.printStackTrace();
-        } catch (IOException e) {   // this catch is for prop.load(fs);
-            System.out.println("ERROR: Unable to read the properties file.");
             e.printStackTrace();
         }
     }

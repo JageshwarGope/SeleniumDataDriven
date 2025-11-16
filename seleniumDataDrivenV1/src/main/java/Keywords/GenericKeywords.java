@@ -15,8 +15,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
-
 public class GenericKeywords {
 
 	public WebDriver driver;
@@ -29,12 +27,12 @@ public class GenericKeywords {
 		if (browserName.equalsIgnoreCase("chrome")) {
 
 			ChromeOptions options = new ChromeOptions();
-			
+
 //			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
 			driver = new ChromeDriver(options);
 
 		} else if (browserName.equalsIgnoreCase("edge")) {
-			
+
 			System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/driver/msedgedriver.exe");
 			driver = new EdgeDriver();
 		} else {
@@ -60,49 +58,46 @@ public class GenericKeywords {
 		getElement(locatorKey).click();
 	}
 
-	
 	public void clickEnterKey(String locatorKey) {
 		getElement(locatorKey).sendKeys(Keys.ENTER);
 	}
+
 	public void enterText(String locatorKey, String value) {
 		getElement(locatorKey).sendKeys(value);
 	}
-	
+
 	public void enterCaptcha(String locatorKey) {
-	    try (Scanner sc = new Scanner(System.in)) { // Using try to auto-close Scanner
-	        System.out.print("Enter Captcha: ");
-	        String captcha = sc.nextLine();
-	        getElement(locatorKey).sendKeys(captcha);
-	    }
+		try (Scanner sc = new Scanner(System.in)) { // Using try to auto-close Scanner
+			System.out.print("Enter Captcha: ");
+			String captcha = sc.nextLine();
+			getElement(locatorKey).sendKeys(captcha);
+		}
 	}
 
 	public void select() {
-		
 
 	}
 
 	public void getText() {
 
 	}
-	
+
 	public void waitForSeconds(int seconds) {
 		try {
 			Thread.sleep(seconds * 1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
-	
+
 	public WebElement getElement(String locatorKey) {
 
 		WebElement element = driver.findElement(getLocator(locatorKey));
 
 		return element;
 	}
-	
+
 	public List<WebElement> getElements(String locatorKey) {
 
 		List<WebElement> elements = driver.findElements(getLocator(locatorKey));
@@ -133,7 +128,5 @@ public class GenericKeywords {
 
 		return by;
 	}
-
-	
 
 }

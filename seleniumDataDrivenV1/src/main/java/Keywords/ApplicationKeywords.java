@@ -5,9 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.testng.annotations.DataProvider;
+
 public class ApplicationKeywords extends ValidationKeywords {
     public ApplicationKeywords() {
-        prop = new Properties();
+         prop = new Properties();
         try {
             String filePath = System.getProperty("user.dir")+"/src/main/resources/properties/ProjectKeys.properties";
             System.out.println("Loading properties file from: " + filePath); // Debugging output
@@ -19,5 +21,6 @@ public class ApplicationKeywords extends ValidationKeywords {
             e.printStackTrace();
         }
     }
+    
 }
 

@@ -1,6 +1,5 @@
 package Keywords;
 
-import java.lang.System.Logger;
 import java.time.Duration;
 import java.util.List;
 import java.util.Properties;
@@ -11,8 +10,12 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+
 
 public class GenericKeywords {
 
@@ -25,11 +28,14 @@ public class GenericKeywords {
 
 		if (browserName.equalsIgnoreCase("chrome")) {
 
-			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
-			driver = new ChromeDriver();
+			ChromeOptions options = new ChromeOptions();
+			
+//			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
+			driver = new ChromeDriver(options);
 
 		} else if (browserName.equalsIgnoreCase("edge")) {
-			System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/driver/chromedriver.exe");
+			
+			System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/driver/msedgedriver.exe");
 			driver = new EdgeDriver();
 		} else {
 			System.out.println("Browser is not available");
@@ -71,6 +77,7 @@ public class GenericKeywords {
 	}
 
 	public void select() {
+		
 
 	}
 

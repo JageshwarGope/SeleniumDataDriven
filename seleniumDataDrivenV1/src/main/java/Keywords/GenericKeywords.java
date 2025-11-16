@@ -72,7 +72,7 @@ public class GenericKeywords {
 			String captcha = sc.nextLine();
 			getElement(locatorKey).sendKeys(captcha);
 		}
-}
+	}
 
 	public void select() {
 

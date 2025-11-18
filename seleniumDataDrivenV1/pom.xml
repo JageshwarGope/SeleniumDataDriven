@@ -84,6 +84,11 @@
 			<artifactId>Amazon</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>seleniumPractice</groupId>
+			<artifactId>seleniumPractice</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 

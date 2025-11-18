@@ -15,6 +15,9 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import reports.ReportManager;
+import utils.ScreenshotUtil;
+
 public class GenericKeywords {
 
 	public WebDriver driver;
@@ -43,6 +46,28 @@ public class GenericKeywords {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 
 	}
+	
+	
+	public void takeScreenShot(String message) {
+	    boolean stepFlag = Boolean.parseBoolean(prop.getProperty("screenshot.onEveryStep"));
+
+	    try {
+	        if (stepFlag) {
+	            String folder = System.getProperty("user.dir") + "/" + prop.getProperty("report.outputFolder");
+	            String path = ScreenshotUtil.takeScreenshot(driver, folder, "STEP");
+
+	            ReportManager.getTest().info(message)
+	                         .addScreenCaptureFromPath(path);
+
+	        } else {
+	            ReportManager.getTest().info(message);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
 
 	public void closeBrowser() {
 		driver.quit();

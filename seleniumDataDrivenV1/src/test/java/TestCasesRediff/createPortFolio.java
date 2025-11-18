@@ -27,8 +27,10 @@ public class createPortFolio extends BaseTestClass {
     public void createPortFolioTest(String username, String password) {
         
         app.openBrowser("browser_name");
+        app.takeScreenShot("browser oppened");
         app.openUrl("url");
         app.clickOnElement("money_menu_xpath");
+        app.takeScreenShot("clicked money meny");
         app.clickOnElement("my_portfolio_xpath");
         app.enterText("user_email_id", username);
         app.enterText("user_pass_name", password);

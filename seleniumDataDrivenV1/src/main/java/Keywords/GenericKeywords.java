@@ -1,6 +1,7 @@
 package Keywords;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
@@ -13,6 +14,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,6 +88,10 @@ public class GenericKeywords {
 	public void clickOnElement(String locatorKey) {
 		getElement(locatorKey).click();
 	}
+	
+	public void clearText(String locatorKey) {
+		getElement(locatorKey).clear();
+	}
 
 	public void clickEnterKey(String locatorKey) {
 		getElement(locatorKey).sendKeys(Keys.ENTER);
@@ -102,11 +108,170 @@ public class GenericKeywords {
 			getElement(locatorKey).sendKeys(captcha);
 		}
 	}
+	
+	// ---select methods
 
-	public void select() {
-
+	public void selectByText(String locatorKey, String text) {
+		
+		WebElement element = getElement(locatorKey);
+		
+		Select select = new Select(element);
+		select.selectByVisibleText(text);
+		log.info("Got selected the option for locator: " + locatorKey);
+	}
+	
+	public void selectByIndex(String locatorKey, int index) {
+		
+		WebElement element = getElement(locatorKey);
+		
+		Select select = new Select(element);
+		select.selectByIndex(index);
+		log.info("Got selected the option for locator: " + locatorKey);
+	}
+	
+	public void selectByValue(String locatorKey, String value) {
+		
+		WebElement element = getElement(locatorKey);
+		
+		Select select = new Select(element);
+		select.selectByValue(value);
+		log.info("Got selected the option for locator: " + locatorKey);
 		
 	}
+	
+	public void selectByTextContains(String locatorKey, String text) {
+		
+		WebElement element = getElement(locatorKey);
+		
+		Select select = new Select(element);
+		select.selectByContainsVisibleText(text);
+		log.info("Got selectByContainsVisibleText the option for locator: " + locatorKey);
+		
+	}
+	
+	public void getFirstSelectedOption(String locatorKey) {
+		
+		WebElement element = getElement(locatorKey);
+		
+		Select select = new Select(element);
+		select.getFirstSelectedOption();
+		log.info("Got getFirstSelectedOption the option for locator: " + locatorKey);
+		
+	}
+	
+	public List<String> getAllSelectedOptions(String locatorKey) {
+		
+		WebElement element = getElement(locatorKey);
+		Select select = new Select(element);
+		List<WebElement> selectedOptions = select.getAllSelectedOptions();
+		List<String> selectedtexts = new ArrayList<>();
+		
+		for(WebElement option : selectedOptions) {
+			String text = option.getText();
+			selectedtexts.add(text);
+		}
+		log.info("Got all the selected options for locator: " + locatorKey);
+		return selectedtexts;
+	}
+	
+	public List<String> getOptions(String locatorKey) {
+		
+		WebElement element = getElement(locatorKey);
+		Select select = new Select(element);
+		
+		List<WebElement> allOptions = select.getOptions();
+		List<String> options = new ArrayList<>();
+		
+		for(WebElement option : allOptions) {
+			String text = option.getText();
+			options.add(text);
+		}
+		log.info("Got all the options for locator: " + locatorKey);
+		return options;
+		
+	}
+	
+	public void selectMultipleByText(String locatorKey, List<String> values) {
+	    WebElement element = getElement(locatorKey);
+	    Select select = new Select(element);
+
+	    if (!select.isMultiple()) {
+	        log.error("Dropdown is NOT multi-select");
+	        return;
+	    }
+
+	    for (String value : values) {
+	        select.selectByVisibleText(value);
+	        log.info("Selected value: " + value);
+	    }
+
+	}
+
+	
+	// ---- Deselect methods
+	
+	public void deselectByText(String locatorKey, String text) {
+		
+		WebElement element = getElement(locatorKey);
+		
+		Select select = new Select(element);
+		select.deselectByVisibleText(text);
+		log.info("Deselected the selected option for locator: " + locatorKey);
+		
+	}
+	
+	public void deselectByIndex(String locatorKey, int index) {
+		
+		WebElement element = getElement(locatorKey);
+		
+		Select select = new Select(element);
+		select.deselectByIndex(index);
+		log.info("Deselected the selected option for locator: " + locatorKey);
+		
+	}
+	
+	public void deselectByValue(String locatorKey, String value) {
+		
+		WebElement element = getElement(locatorKey);
+		
+		Select select = new Select(element);
+		select.deselectByValue(value);
+		log.info("Deselected the selected option for locator: " + locatorKey);
+		
+	}
+	
+	public void deselectByTextContains(String locatorKey, String text) {
+		
+		WebElement element = getElement(locatorKey);
+		
+		Select select = new Select(element);
+		select.deSelectByContainsVisibleText(text);
+		log.info("Deselected the selected option for locator: " + locatorKey);
+		
+	}
+	
+	public void deselectAll(String locatorKey) {
+
+	    try {
+	        WebElement element = getElement(locatorKey);
+	        Select select = new Select(element);
+
+	        if (!select.isMultiple()) {
+	            log.error("Cannot deselect: Dropdown '" + locatorKey + "' is NOT multi-select.");
+	            ReportManager.getTest().warning("Dropdown is NOT multi-select: " + locatorKey);
+	            return;
+	        }
+
+	        select.deselectAll();
+
+	        log.info("Deselected all options for locator: " + locatorKey);
+
+	    } catch (Exception e) {
+	        log.error("Failed to deselect all options for locator: " + locatorKey, e);
+	        ReportManager.getTest().fail("Deselect all failed for: " + locatorKey);
+	    }
+	}
+
 
 	public void getText() {
 

@@ -273,8 +273,10 @@ public class GenericKeywords {
 	}
 
 
-	public void getText() {
-
+	public void getText(String locatorKey) {
+		getElement(locatorKey).getText();
+		log.info("Fetched the text for locator: " + locatorKey);
+		
 	}
 
 	public void waitForSeconds(int seconds) {
@@ -323,5 +325,6 @@ public class GenericKeywords {
 
 		return by;
 	}
+
 
 }

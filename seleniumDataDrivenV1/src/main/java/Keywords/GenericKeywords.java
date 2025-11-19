@@ -14,6 +14,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import reports.ReportManager;
 import utils.ScreenshotUtil;
@@ -22,6 +24,8 @@ public class GenericKeywords {
 
 	public WebDriver driver;
 	public Properties prop;
+	
+	private static final Logger log = LoggerFactory.getLogger(GenericKeywords.class);
 
 	public void openBrowser(String browserKey) {
 
@@ -39,7 +43,7 @@ public class GenericKeywords {
 			System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/driver/msedgedriver.exe");
 			driver = new EdgeDriver();
 		} else {
-			System.out.println("Browser is not available");
+			log.info("Browser is not available" );
 		}
 
 		driver.manage().window().maximize();

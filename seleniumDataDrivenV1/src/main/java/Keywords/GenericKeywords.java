@@ -291,7 +291,6 @@ public class GenericKeywords {
 	public WebElement getElement(String locatorKey) {
 
 		WebElement element = driver.findElement(getLocator(locatorKey));
-
 		return element;
 	}
 

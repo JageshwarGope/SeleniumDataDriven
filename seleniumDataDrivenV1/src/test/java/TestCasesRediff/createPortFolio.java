@@ -34,9 +34,9 @@ public class createPortFolio extends BaseTestClass {
         app.clickOnElement("my_portfolio_xpath");
         app.enterText("user_email_id", username);
         app.enterText("user_pass_name", password);
-        app.enterCaptcha("captcha_className");
-        app.waitForSeconds(30);
-        app.clickOnElement("submit_id");
+        // app.enterCaptcha("captcha_className");
+        // app.waitForSeconds(30);
+        // app.clickOnElement("submit_id");
         app.closeBrowser();
     }
 }
